@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 	"fmt"
@@ -44,6 +44,8 @@ func (yp *YamlParser) parse(filepath string) (map[string]interface{}, error) {
 			return nil, err
 		}
 	}
+
+	buffer = []byte(os.ExpandEnv(string(buffer)))
 
 	config := make(map[string]interface{})
 	err = yaml.Unmarshal(buffer, &config)
